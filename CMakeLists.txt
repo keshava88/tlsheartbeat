@@ -1,0 +1,20 @@
+cmake_minimum_required(VERSION 2.8)
+include_directories(${CMAKE_CURRENT_LIST_DIR})
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
+add_executable(mainApp main.c)
+add_executable(clientApp client.c)
+add_executable(serverApp server.c)
+add_executable(server2App server2.cpp)
+add_executable(client2App client2.cpp)
+
+find_package(OpenSSL)
+if(OPENSSL_FOUND)
+    target_link_libraries(mainApp ${OPENSSL_LIBRARIES})
+    target_link_libraries(serverApp ${OPENSSL_LIBRARIES})
+    target_link_libraries(clientApp ${OPENSSL_LIBRARIES})
+    target_link_libraries(server2App ${OPENSSL_LIBRARIES})
+    target_link_libraries(client2App ${OPENSSL_LIBRARIES})
+
+endif()
+
